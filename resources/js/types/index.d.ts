@@ -36,3 +36,33 @@ export interface User {
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+export type FormMethod = {
+    _method?: string;
+};
+
+export type Form = {
+    [key: string]: any;
+};
+
+export interface Product {
+    id: number;
+    creator_id: number;
+    creator: User
+    image: string;
+    slug: string;
+    title: string;
+    description: string;
+    price: number;
+}
+
+export interface ProductForm extends Form, FormMethod {
+
+}
+
+export interface DeleteForm {
+    id: number;
+    name: string;
+    amount?: number;
+    created_at?: Date;
+}
