@@ -91,7 +91,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                                     <Link
                                         class="border border-gray-300 dark:border-gray-700 rounded-md p-1 active:scale-90 transition"
                                         :title="'Edit question'"
-                                        :href="route('products.edit', item.id)"
+                                        :href="route('admin.products.edit', item.id)"
                                     >
                                         <IconPencilSquare
                                             classes="w-4 h-4 "

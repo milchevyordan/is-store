@@ -97,7 +97,6 @@ class CategoryService
     {
         $validatedRequest = $request->validated();
 
-
         $category = $this->getCategory();
         $changeLoggerService = new ChangeLoggerService($category);
 

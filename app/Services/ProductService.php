@@ -57,12 +57,12 @@ class ProductService
     public function getIndexMethodDatatable(): DataTable
     {
         return (new DataTable(
-            Product::with('answers')
+            Product::query()
         ))
             ->setColumn('action', 'Action')
             ->setColumn('id', '#', true, true)
-            ->setColumn('question', 'Question', true, true)
-            ->setColumn('is_binary', 'Is Binary', true, true)
+            ->setColumn('title', 'Title', true, true)
+            ->setColumn('price', 'Price', true, true)
             ->setColumn('created_at', 'Created', true, true)
             ->setDateColumn('created_at', 'dd.mm.YYYY H:i')
             ->run();
@@ -78,17 +78,13 @@ class ProductService
     {
         $validatedRequest = $request->validated();
 
-        $quizQuestion = new Product();
-        $quizQuestion->fill($validatedRequest);
-        $quizQuestion->save();
+        $product = new Product();
+        $product->fill($validatedRequest);
+        $product->creator_id = auth()->id();
 
-        if (!$validatedRequest['is_binary']) {
-            $quizQuestion->answers()->createMany($validatedRequest['answers']);
-        }
+        (new ImageService($request, $product))->storeImage();
 
-        $this->setProduct($quizQuestion);
-
-        CacheService::clearQuestionsCache();
+        $this->setProduct($product);
 
         return $this;
     }
@@ -103,17 +99,14 @@ class ProductService
     {
         $validatedRequest = $request->validated();
 
-        $quizQuestion = $this->getProduct();
-        $quizQuestion->update($validatedRequest);
+        $product = $this->getProduct();
+        $changeLoggerService = new ChangeLoggerService($product);
 
-        if (!$validatedRequest['is_binary']) {
-            $quizQuestion->answers()->delete();
-            $quizQuestion->answers()->createMany($validatedRequest['answers']);
-        }
+        $product->update($validatedRequest);
+        (new ImageService($request, $product))->storeImage();
 
-        $this->setProduct($quizQuestion);
-
-        CacheService::clearQuestionsCache();
+        $changeLoggerService->logChanges($product);
+        $this->setProduct($product);
 
         return $this;
     }

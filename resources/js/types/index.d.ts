@@ -25,6 +25,13 @@ export type AppPageProps<T extends Record<string, unknown> = Record<string, unkn
     sidebarOpen: boolean;
 };
 
+export type Enum<T> = T[keyof T];
+
+export interface Option {
+    name: string;
+    value: string | number | null;
+}
+
 export interface User {
     id: number;
     name: string;
@@ -49,11 +56,14 @@ export interface Product {
     id: number;
     creator_id: number;
     creator: User
+    category_id: number
     image: string;
     slug: string;
     title: string;
     description: string;
     price: number;
+    change_logs?: ChangeLog[];
+    change_logs_limited?: ChangeLog[];
 }
 
 export interface ProductForm extends Form, FormMethod {
