@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import { Product } from '@/types';
+
+defineProps<{
+    offerings: Product[];
+}>();
 </script>
 
 <template>
@@ -39,7 +44,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 <div class="w-full md:w-4/12 lg:w-6/12 xl:w-6/12">
                     <img
                         class="b-auto mx-auto h-auto max-w-full object-contain md:absolute md:right-0 md:top-0 md:mt-20 md:w-5/12"
-                        src="/images/13.png"
+                        src="/images/cover-image.webp"
                         alt="Potato"
                     />
                 </div>
@@ -76,92 +81,36 @@ import { Head, Link } from '@inertiajs/vue3';
             </div>
         </section>
 
-        <section class="z-1 bg-blueGray-600 relative block pb-64">
+        <section class="z-1 bg-blueGray-600 relative block">
             <div class="container mx-auto">
                 <div class="flex flex-wrap justify-center">
                     <div class="lg:w-12/12 -mt-24 w-full px-4">
                         <div class="flex flex-wrap">
-                            <div class="w-full px-4 lg:w-4/12">
+                            <div
+                                v-for="product in offerings"
+                                :key="product.id"
+                                class="w-full px-4 lg:w-4/12"
+                            >
                                 <h5
                                     class="pb-4 text-center text-xl font-semibold"
                                 >
-                                    Plasmax / Плазмакс
+                                    {{ product.title }}
                                 </h5>
-                                <a href="/">
+                                <Link href="/">
                                     <div
                                         class="relative mb-6 flex w-full min-w-0 flex-col break-words rounded-lg bg-white shadow-lg transition-all duration-150 ease-linear hover:-mt-4"
                                     >
                                         <img
                                             alt="..."
                                             class="h-auto max-w-full rounded-lg border-none align-middle"
-                                            src="/images/PLASMAX-640x640h.webp"
+                                            :src="`/storage/${product.image}`"
                                         />
                                     </div>
-                                </a>
-                            </div>
-
-                            <div class="w-full px-4 lg:w-4/12">
-                                <h5
-                                    class="pb-4 text-center text-xl font-semibold"
-                                >
-                                    SPORT&POWER BOOSTER
-                                </h5>
-                                <a href="/">
-                                    <div
-                                        class="relative mb-6 flex w-full min-w-0 flex-col break-words rounded-lg bg-white shadow-lg transition-all duration-150 ease-linear hover:-mt-4"
-                                    >
-                                        <img
-                                            alt="..."
-                                            class="h-auto max-w-full rounded-lg border-none align-middle"
-                                            src="/images/SportPower-640x640h.jpg"
-                                        />
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="w-full px-4 lg:w-4/12">
-                                <h5
-                                    class="pb-4 text-center text-xl font-semibold"
-                                >
-                                    Is GEL Лиофилизат
-                                </h5>
-                                <a href="/">
-                                    <div
-                                        class="relative mb-6 flex w-full min-w-0 flex-col break-words rounded-lg bg-white shadow-lg transition-all duration-150 ease-linear hover:-mt-4"
-                                    >
-                                        <img
-                                            alt="..."
-                                            class="h-auto max-w-full rounded-lg border-none align-middle"
-                                            src="/images/_________________-640x640h.webp"
-                                        />
-                                    </div>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="bg-blueGray-200 relative pb-16 pt-32">
-            <div
-                class="absolute bottom-auto left-0 right-0 top-0 -mt-20 h-20 w-full"
-                style="transform: translateZ(0)"
-            >
-                <svg
-                    class="absolute bottom-0 overflow-hidden"
-                    xmlns="http://www.w3.org/2000/svg"
-                    preserveAspectRatio="none"
-                    version="1.1"
-                    viewBox="0 0 2560 100"
-                    x="0"
-                    y="0"
-                >
-                    <polygon
-                        class="text-blueGray-200 fill-current"
-                        points="2560 0 2560 100 0 100"
-                    ></polygon>
-                </svg>
             </div>
         </section>
     </GuestLayout>

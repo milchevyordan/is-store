@@ -28,10 +28,10 @@ const toggleNavbar = () => {
                 class="relative flex w-full justify-between lg:static lg:block lg:w-auto lg:justify-start"
             >
                 <Link
-                    class="mr-4 inline-block whitespace-nowrap py-2 font-bold uppercase leading-relaxed text-cyan-500"
+                    class="mr-4 inline-block whitespace-nowrap py-2 font-bold uppercase leading-relaxed"
                     :href="route('home')"
                 >
-                    IS
+                    <span class="text-cyan-500">IS</span>
                 </Link>
                 <button
                     class="block cursor-pointer rounded border border-solid border-transparent bg-transparent px-3 py-1 text-xl leading-none outline-none focus:outline-none lg:hidden"
