@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Services\ProductService;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ProductController extends Controller
 {
@@ -20,7 +21,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         return Inertia::render('products/Index', [
             'dataTable'         => $this->service->getIndexMethodDatatable(),

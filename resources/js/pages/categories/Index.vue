@@ -8,12 +8,15 @@ import Table from "@/DataTable/Table.vue";
 import { DataTable } from "@/DataTable/types";
 import IconPencilSquare from "@/icons/PencilSquare.vue";
 import IconTrash from "@/icons/Trash.vue";
-import { type BreadcrumbItem, DeleteForm, Product } from '@/types';
+import { type BreadcrumbItem, Category, ChangeLog, DeleteForm, Product } from '@/types';
 import {dateTimeToLocaleString} from "@/utils";
 import AppLayout from "@/layouts/AppLayout.vue";
+import ChangeLogs from '@/components/HTML/ChangeLogs.vue';
 
 defineProps<{
-    dataTable: DataTable<Product>;
+    dataTable: DataTable<Category>;
+    changeLogsLimited: ChangeLog[];
+    changeLogs?: DataTable<ChangeLog>;
 }>();
 
 
@@ -39,7 +42,7 @@ const closeDeleteModal = () => {
 
 const handleDelete = () => {
     deleteForm.delete(
-        route('admin.products.destroy', deleteForm.id as number),
+        route('admin.categories.destroy', deleteForm.id as number),
         {
             preserveScroll: true,
         },
@@ -49,14 +52,14 @@ const handleDelete = () => {
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Product',
-        href: 'admin.products',
+        title: 'Category',
+        href: 'admin.categories',
     },
 ];
 </script>
 
 <template>
-    <Head :title="'Product'" />
+    <Head :title="'Category'" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="py-12">
@@ -75,9 +78,9 @@ const breadcrumbs: BreadcrumbItem[] = [
                                 <div class="w-full flex gap-2">
                                     <Link
                                         class="w-full md:w-auto border border-gray-300 dark:border-gray-700 rounded-md px-5 py-1.5 active:scale-95 transition hover:bg-gray-50 dark:hover:bg-gray-800"
-                                        :href="route('admin.products.create')"
+                                        :href="route('admin.categories.create')"
                                     >
-                                        Create Product
+                                        Create Category
                                     </Link>
                                 </div>
                             </template>
@@ -91,7 +94,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                                     <Link
                                         class="border border-gray-300 dark:border-gray-700 rounded-md p-1 active:scale-90 transition"
                                         :title="'Edit question'"
-                                        :href="route('products.edit', item.id)"
+                                        :href="route('admin.categories.edit', item.id)"
                                     >
                                         <IconPencilSquare
                                             classes="w-4 h-4 "
@@ -110,6 +113,12 @@ const breadcrumbs: BreadcrumbItem[] = [
                         </Table>
                     </div>
                 </div>
+
+                <ChangeLogs
+                    :change-logs-limited="changeLogsLimited"
+                    :change-logs="changeLogs"
+                    :show-id="true"
+                />
             </div>
         </div>
     </AppLayout>
@@ -121,7 +130,7 @@ const breadcrumbs: BreadcrumbItem[] = [
         <div
             class="border-b border-gray-100 dark:border-gray-700 px-3.5 p-3 text-xl font-medium"
         >
-            Delete Product <span class="font-bold">#{{ deleteForm?.id }}</span> ?
+            Delete Category <span class="font-bold">#{{ deleteForm?.id }}</span> ?
         </div>
 
         <form

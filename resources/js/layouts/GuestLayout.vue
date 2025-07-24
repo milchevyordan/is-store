@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Footer from '@/Components/Front/Footer.vue';
-import MessageAlert from '@/Components/Front/MessageAlert.vue';
-import Nav from '@/Components/Front/Nav.vue';
+import Footer from '@/components/Front/Footer.vue';
+import MessageAlert from '@/components/Front/MessageAlert.vue';
+import Nav from '@/components/Front/Nav.vue';
 
 defineProps<{
     navTransparent?: boolean;
