@@ -33,7 +33,9 @@ class ProductController extends Controller
     public function index(): Response
     {
         return Inertia::render('products/Index', [
-            'dataTable' => $this->service->getIndexMethodDatatable(),
+            'dataTable'         => $this->service->getIndexMethodDatatable(),
+            'changeLogsLimited' => ChangeLogService::getChangeLogsLimited(Product::class),
+            'changeLogs'        => Inertia::lazy(fn () => ChangeLogService::getChangeLogsDataTable(Product::class)),
         ]);
     }
 

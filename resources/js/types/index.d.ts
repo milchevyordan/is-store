@@ -122,6 +122,7 @@ export interface Order {
     total_price: string;
     delivery_date: string;
     created_at?: Date;
+    products?: OrderProduct[];
     change_logs?: ChangeLog[];
     change_logs_limited?: ChangeLog[];
 }
@@ -131,3 +132,11 @@ export interface OrderForm
         Form,
         FormMethod {}
 
+export interface OrderProduct {
+    id: number;
+    order_id: number;
+    product_id: number;
+    quantity: number;
+    price: number;
+    product?: Product;
+}

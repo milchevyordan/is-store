@@ -10,16 +10,19 @@ import { OrderStatus } from '@/enums/OrderStatus';
 import DocumentText from '@/icons/DocumentText.vue';
 import IconPencilSquare from '@/icons/PencilSquare.vue';
 import IconTrash from '@/icons/Trash.vue';
-import { type BreadcrumbItem, DeleteForm, Order } from '@/types';
+import { type BreadcrumbItem, ChangeLog, DeleteForm, Order } from '@/types';
 import {
     dateTimeToLocaleString,
     findEnumKeyByValue,
     replaceEnumUnderscores,
 } from '@/utils';
 import AppLayout from '@/layouts/AppLayout.vue';
+import ChangeLogs from '@/components/HTML/ChangeLogs.vue';
 
 const props = defineProps<{
     dataTable: DataTable<Order>;
+    changeLogsLimited: ChangeLog[];
+    changeLogs?: DataTable<ChangeLog>;
 }>();
 
 const showDeleteModal = ref<boolean>(false);
@@ -140,6 +143,11 @@ const breadcrumbs: BreadcrumbItem[] = [
                         </Table>
                     </div>
                 </div>
+
+                <ChangeLogs
+                    :change-logs-limited="changeLogsLimited"
+                    :change-logs="changeLogs"
+                />
             </div>
         </div>
     </AppLayout>

@@ -117,7 +117,6 @@ const breadcrumbs: BreadcrumbItem[] = [
                 <ChangeLogs
                     :change-logs-limited="changeLogsLimited"
                     :change-logs="changeLogs"
-                    :show-id="true"
                 />
             </div>
         </div>

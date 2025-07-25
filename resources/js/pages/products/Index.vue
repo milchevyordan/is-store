@@ -8,12 +8,15 @@ import Table from "@/DataTable/Table.vue";
 import { DataTable } from "@/DataTable/types";
 import IconPencilSquare from "@/icons/PencilSquare.vue";
 import IconTrash from "@/icons/Trash.vue";
-import { type BreadcrumbItem, DeleteForm, Product } from '@/types';
+import { type BreadcrumbItem, ChangeLog, DeleteForm, Product } from '@/types';
 import {dateTimeToLocaleString} from "@/utils";
 import AppLayout from "@/layouts/AppLayout.vue";
+import ChangeLogs from '@/components/HTML/ChangeLogs.vue';
 
 defineProps<{
     dataTable: DataTable<Product>;
+    changeLogsLimited: ChangeLog[];
+    changeLogs?: DataTable<ChangeLog>;
 }>();
 
 
@@ -110,6 +113,11 @@ const breadcrumbs: BreadcrumbItem[] = [
                         </Table>
                     </div>
                 </div>
+
+                <ChangeLogs
+                    :change-logs-limited="changeLogsLimited"
+                    :change-logs="changeLogs"
+                />
             </div>
         </div>
     </AppLayout>

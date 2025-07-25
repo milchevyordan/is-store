@@ -30,7 +30,9 @@ class OrderController extends Controller
     public function index(): Response
     {
         return Inertia::render('orders/Index', [
-            'dataTable' => fn () => $this->service->getIndexMethodDatatable(),
+            'dataTable'         => fn () => $this->service->getIndexMethodDatatable(),
+            'changeLogsLimited' => ChangeLogService::getChangeLogsLimited(Order::class),
+            'changeLogs'        => Inertia::lazy(fn () => ChangeLogService::getChangeLogsDataTable(Order::class)),
         ]);
     }
 
@@ -42,7 +44,7 @@ class OrderController extends Controller
      */
     public function show(Order $order): Response
     {
-        $order->load(['changeLogsLimited']);
+        $order->load(['changeLogsLimited', 'products']);
 
         return Inertia::render('orders/Show', [
             'order'      => $order,
@@ -58,7 +60,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order): Response
     {
-        $order->load(['changeLogsLimited']);
+        $order->load(['changeLogsLimited', 'products']);
 
         return Inertia::render('orders/Edit', [
             'order'      => $order,

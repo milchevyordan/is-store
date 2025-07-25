@@ -241,66 +241,50 @@ const handleQuantityChange = () => {
                                         <li
                                             v-for="cartItem in cartItems"
                                             :key="cartItem.id"
-                                            class="flex px-4 py-6 sm:px-6"
+                                            class="flex items-start gap-4 rounded-lg border border-gray-200 bg-white px-4 py-6 shadow-sm sm:px-6"
                                         >
-                                            <div class="flex-shrink-0">
-                                                <img
-                                                    :src="`/storage/${cartItem.image}`"
-                                                    alt="alt"
-                                                    class="w-20 rounded-md"
-                                                />
-                                            </div>
+                                            <!-- Product image -->
+                                            <img
+                                                :src="`/storage/${cartItem.image}`"
+                                                alt="alt"
+                                                class="h-20 w-20 rounded-md object-cover"
+                                            />
 
-                                            <div
-                                                class="ml-6 flex flex-1 flex-col"
-                                            >
-                                                <div class="flex">
-                                                    <div class="min-w-0 flex-1">
-                                                        <h4 class="text-sm">
+                                            <!-- Product details and actions -->
+                                            <div class="flex flex-1 flex-col justify-between">
+                                                <!-- Top row: title + remove -->
+                                                <div class="flex justify-between items-start">
+                                                    <div>
+                                                        <h4 class="text-base font-medium text-gray-900">
                                                             <Link
-                                                                :href="route('product',cartItem.slug)"
-                                                                class="font-medium text-gray-700 hover:text-gray-800"
+                                                                :href="route('product', cartItem.slug)"
+                                                                class="hover:underline hover:text-indigo-600"
                                                             >
                                                                 {{ cartItem.title }}
                                                             </Link>
                                                         </h4>
+                                                        <p class="text-sm text-gray-500">
+                                                            {{ cartItem.price }} lv. each
+                                                        </p>
                                                     </div>
-
-                                                    <div
-                                                        class="ml-4 flow-root flex-shrink-0"
+                                                    <button
+                                                        type="button"
+                                                        @click="removeFromCart(cartItem.id)"
+                                                        class="text-gray-400 hover:text-red-500 transition"
+                                                        title="Remove item"
                                                     >
-                                                        <button
-                                                            type="button"
-                                                            class="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-red-500"
-                                                            @click="removeFromCart(cartItem.id)"
-                                                        >
-                                                            <span
-                                                                class="sr-only"
-                                                                >Remove</span
-                                                            >
-                                                            <TrashIcon
-                                                                class="h-5 w-5"
-                                                                aria-hidden="true"
-                                                            />
-                                                        </button>
-                                                    </div>
+                                                        <TrashIcon class="h-5 w-5" aria-hidden="true" />
+                                                    </button>
                                                 </div>
 
-                                                <div
-                                                    class="flex flex-1 items-end justify-between pt-2"
-                                                >
-                                                    <p
-                                                        class="mt-1 text-sm font-medium text-gray-900"
-                                                    >
-                                                        {{ cartItem.price }} lv.
-                                                    </p>
-
-                                                    <div class="ml-4">
+                                                <!-- Bottom row: quantity & subtotal -->
+                                                <div class="mt-4 flex items-center justify-between gap-4">
+                                                    <div class="flex items-center gap-2">
                                                         <label
                                                             for="quantity"
-                                                            class="sr-only"
+                                                            class="text-sm text-gray-700"
                                                         >
-                                                            Quantity
+                                                            Qty:
                                                         </label>
                                                         <TextInput
                                                             id="quantity"
@@ -308,10 +292,14 @@ const handleQuantityChange = () => {
                                                             type="number"
                                                             step="1"
                                                             min="0"
-                                                            classes="w-16 rounded-md border border-gray-300 text-left text-base font-medium text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                                                            class="w-20 rounded-md border border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                                             v-model="quantityForm[cartItem.id].quantity"
                                                             @change="handleQuantityChange"
                                                         />
+                                                    </div>
+
+                                                    <div class="text-sm font-semibold text-gray-900 whitespace-nowrap">
+                                                        {{ (quantityForm[cartItem.id].quantity * cartItem.price).toFixed(2) }} lv.
                                                     </div>
                                                 </div>
                                             </div>
