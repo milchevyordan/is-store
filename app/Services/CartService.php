@@ -162,11 +162,13 @@ class CartService
      */
     public function saveOrder(array $validatedRequest): static
     {
+        $cartService = new CartService();
+
         $order = new Order();
         $order->fill($validatedRequest);
+        $order->total_price = $cartService->getCartTotalPrice();
         $order->save();
 
-        $cartService = new CartService();
         $cartItems = $cartService->getCartItems();
         foreach ($cartService->getCart() as $productId => $quantity) {
             $product = $cartItems->where('id', $productId)->first();
@@ -174,8 +176,7 @@ class CartService
             $orderProduct->order_id = $order->id;
             $orderProduct->product_id = $productId;
             $orderProduct->quantity = $quantity['quantity'];
-            $orderProduct->partner_price = $product->partner_price;
-            $orderProduct->client_price = $product->client_price;
+            $orderProduct->price = $product->price;
             $orderProduct->save();
         }
 

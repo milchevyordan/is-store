@@ -341,7 +341,7 @@ const handleQuantityChange = () => {
                                             class="w-full rounded-md border border-transparent bg-cyan-500 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                                             :disabled="form.processing"
                                         >
-                                            Confirm Order
+                                            Send Order
                                         </button>
                                     </div>
                                 </div>

@@ -58,6 +58,21 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'flash'       => [
+                // Flash session variables -> !!! Vue plugin doesn't update the values, so we can check them in the components via {{ }} !!!
+                'status'  => fn () => session('status'),
+                'success' => fn () => session('success'),
+                'errors'  => function () {
+                    $errorBag = session('errors');
+
+                    if ($errorBag) {
+                        return $errorBag->toArray();
+                    }
+
+                    return [];
+                },
+                'error' => fn () => session('error'),
+            ],
         ];
     }
 }

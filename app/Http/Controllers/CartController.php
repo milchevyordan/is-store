@@ -73,7 +73,7 @@ class CartController extends Controller
     }
 
     /**
-     * Save the order in database.
+     * Save the order in a database.
      *
      * @param  StoreOrderRequest $request
      * @return RedirectResponse
@@ -87,13 +87,13 @@ class CartController extends Controller
 
             DB::commit();
 
-            return redirect()->route('home')->with('success', 'Поръчката е регистрирана успешно.');
+            return redirect()->route('home')->with('success', 'Order saved successfully!');
         } catch (Throwable $th) {
             DB::rollBack();
 
             Log::error($th->getMessage(), ['exception' => $th]);
 
-            return redirect()->back()->withErrors(['Грешка при регистриране на поръчка.']);
+            return redirect()->back()->withErrors(['Error saving order.']);
         }
     }
 }
