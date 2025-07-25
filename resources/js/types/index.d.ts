@@ -57,6 +57,7 @@ export interface Product {
     creator_id: number;
     creator: User
     category_id: number
+    category: Category
     image: string;
     slug: string;
     title: string;
@@ -104,5 +105,9 @@ export interface ChangeLog {
 interface ChangeLogsChange {
     old: string;
     new: string;
+}
+
+export interface CartForm {
+    product_id: number;
 }
 

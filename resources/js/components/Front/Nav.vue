@@ -64,7 +64,7 @@ const toggleNavbar = () => {
                                     transparent,
                                 'hover:text-blueGray-500 py-2': !transparent,
                             }"
-                            :href="route('home')"
+                            :href="route('products')"
                         >
                             <i
                                 class="text-blueGray-400 fa-solid fa-cube leading-lg mr-2 text-lg"
