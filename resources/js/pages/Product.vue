@@ -32,7 +32,7 @@ const addToCart = async () => {
 
     <GuestLayout>
         <div class="bg-white">
-            <div class="pb-16 pt-16 sm:pb-24">
+            <div class="pt-16 sm:pb-24">
                 <div
                     class="mx-auto mt-8 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8"
                 >

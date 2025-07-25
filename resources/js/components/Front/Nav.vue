@@ -103,10 +103,10 @@ const toggleNavbar = () => {
                     <li class="flex items-center">
                         <Link
                             class="relative mb-3 ml-3 rounded bg-cyan-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none lg:mb-0 lg:mr-1"
-                            :href="route('home')"
+                            :href="route('cart.index')"
                         >
                             <i class="fa-solid fa-cart-shopping mr-1"></i>
-                            Количка
+                            Cart
                             <span
                                 v-if="usePage().props.cartItemsCount > 0"
                                 class="absolute -right-2 -top-2 rounded-full bg-red-500 px-2 text-xs font-bold text-white"

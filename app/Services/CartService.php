@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Models\User;
+use App\Notifications\EmailNotification;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Notification;
 
 class CartService
 {
@@ -61,7 +66,7 @@ class CartService
      */
     public function setCartItems(): self
     {
-        $this->cartItems = Product::whereIn('id', array_keys($this->getCart()))->select('id', 'slug', 'title', 'client_price', 'partner_price', 'image')->get();
+        $this->cartItems = Product::whereIn('id', array_keys($this->getCart()))->get();
 
         return $this;
     }
@@ -69,21 +74,16 @@ class CartService
     /**
      * Calculate and return client and partner total price.
      */
-    public function getCartTotalPrice(): array
+    public function getCartTotalPrice(): float
     {
         $cart = $this->getCart();
 
-        $partnerPriceTotal = 0;
-        $clientPriceTotal = 0;
+        $totalPrice = 0;
         foreach ($this->getCartItems() as $cartItem) {
-            $partnerPriceTotal += $cartItem->partner_price * $cart[$cartItem->id]['quantity'];
-            $clientPriceTotal += $cartItem->client_price * $cart[$cartItem->id]['quantity'];
+            $totalPrice += $cartItem->price * $cart[$cartItem->id]['quantity'];
         }
 
-        return [
-            'partner_price_total' => $partnerPriceTotal,
-            'client_price_total'  => $clientPriceTotal,
-        ];
+        return $totalPrice;
     }
 
     /**
@@ -155,5 +155,33 @@ class CartService
     public function setCartCookie(array $cart): void
     {
         Cookie::queue($this->cookieName, json_encode($cart), $this->cookieLifetime);
+    }
+
+    /**
+     * Save the order.
+     *
+     * @param  array $validatedRequest
+     * @return $this
+     */
+    public function saveOrder(array $validatedRequest): static
+    {
+        $order = new Order();
+        $order->fill($validatedRequest);
+        $order->save();
+
+        $cartService = new CartService();
+        $cartItems = $cartService->getCartItems();
+        foreach ($cartService->getCart() as $productId => $quantity) {
+            $product = $cartItems->where('id', $productId)->first();
+            $orderProduct = new OrderProduct();
+            $orderProduct->order_id = $order->id;
+            $orderProduct->product_id = $productId;
+            $orderProduct->quantity = $quantity['quantity'];
+            $orderProduct->partner_price = $product->partner_price;
+            $orderProduct->client_price = $product->client_price;
+            $orderProduct->save();
+        }
+
+        return $this;
     }
 }

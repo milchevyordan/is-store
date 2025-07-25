@@ -111,3 +111,22 @@ export interface CartForm {
     product_id: number;
 }
 
+export interface Order {
+    id: number;
+    status: Enum<typeof OrderStatus>;
+    delivery_address: string;
+    phone: string;
+    additional_requirements: string;
+    delivery_date: string;
+    name: string;
+    email: string;
+    created_at?: Date;
+    change_logs?: ChangeLog[];
+    change_logs_limited?: ChangeLog[];
+}
+
+export interface OrderForm
+    extends Omit<Order, 'status', 'id'>,
+        Form,
+        FormMethod {}
+

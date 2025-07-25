@@ -10,8 +10,14 @@ use Inertia\Inertia;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'products'])->name('products');
 Route::get('/product/{slug}', [HomeController::class, 'product'])->name('product');
-Route::post('/cart/add', [CartController::class, 'addProduct'])->name('cart.add');
 
+Route::name('cart.')->prefix('/cart')->group(function () {
+    Route::get('/', [CartController::class, 'index'])->name('index');
+    Route::post('/add', [CartController::class, 'addProduct'])->name('add');
+    Route::post('/change-quantity', [CartController::class, 'changeQuantity'])->name('change-quantity');
+    Route::post('/remove', [CartController::class, 'removeFromCart'])->name('remove');
+    Route::post('/save', [CartController::class, 'saveOrder'])->name('save');
+});
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
