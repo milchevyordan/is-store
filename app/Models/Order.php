@@ -26,6 +26,8 @@ class Order extends Model
         'email',
         'delivery_address',
         'additional_requirements',
+        'total_price',
+        'delivery_date',
     ];
 
     /**

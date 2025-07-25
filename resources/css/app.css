@@ -194,3 +194,8 @@ html.dark {
     opacity: 0;
     transform: scale(0.5);
 }
+
+input[type="date"] {
+    background-color: #fff;
+    color: #333;
+}

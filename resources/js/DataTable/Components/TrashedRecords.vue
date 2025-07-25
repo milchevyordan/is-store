@@ -36,8 +36,8 @@ const handleShowTrashedRecords = async (input: RadioToggleInput) => {
         key="filter[trashed]"
         v-model="archivedOptionSelected"
         name="filter[trashed]"
-        :left-button-label="'В кошче'"
-        :right-button-label="'В експлоатация'"
+        :left-button-label="'Deleted'"
+        :right-button-label="'Active'"
         @change="handleShowTrashedRecords"
     />
 </template>

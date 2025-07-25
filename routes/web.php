@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,6 +27,7 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->name('admin.')->prefix('/admin')->group(function () {
+    Route::resource('order', OrderController::class)->names('orders')->except(['create']);
     Route::resource('category', CategoryController::class)->names('categories')->except(['show']);
     Route::resource('product', ProductController::class)->names('products')->except(['show']);
 });

@@ -114,12 +114,13 @@ export interface CartForm {
 export interface Order {
     id: number;
     status: Enum<typeof OrderStatus>;
-    delivery_address: string;
-    phone: string;
-    additional_requirements: string;
-    delivery_date: string;
     name: string;
+    phone: string;
     email: string;
+    delivery_address: string;
+    additional_requirements: string;
+    total_price: string;
+    delivery_date: string;
     created_at?: Date;
     change_logs?: ChangeLog[];
     change_logs_limited?: ChangeLog[];
