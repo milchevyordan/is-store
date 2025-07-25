@@ -260,7 +260,12 @@ const handleQuantityChange = () => {
                                                                 :href="route('product', cartItem.slug)"
                                                                 class="hover:underline hover:text-indigo-600"
                                                             >
-                                                                {{ cartItem.title }}
+                                                                <div>
+                                                                    {{ cartItem.title }}
+                                                                </div>
+                                                                <div v-if="cartItem.category">
+                                                                    {{ cartItem.category.title }}
+                                                                </div>
                                                             </Link>
                                                         </h4>
                                                         <p class="text-sm text-gray-500">

@@ -101,8 +101,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateProductRequest $request
-     * @param Product              $product
+     * @param  UpdateProductRequest $request
+     * @param  Product              $product
+     * @return RedirectResponse
      */
     public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {

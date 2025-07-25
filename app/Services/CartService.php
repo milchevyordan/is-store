@@ -63,7 +63,7 @@ class CartService
      */
     public function setCartItems(): self
     {
-        $this->cartItems = Product::whereIn('id', array_keys($this->getCart()))->get();
+        $this->cartItems = Product::whereIn('id', array_keys($this->getCart()))->with('category:id,title')->get();
 
         return $this;
     }

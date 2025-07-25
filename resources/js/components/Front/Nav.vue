@@ -64,6 +64,25 @@ const toggleNavbar = () => {
                                     transparent,
                                 'hover:text-blueGray-500 py-2': !transparent,
                             }"
+                            :href="route('categories')"
+                        >
+                            <i
+                                class="text-blueGray-400 fa-solid fa-cube leading-lg mr-2 text-lg"
+                                :class="{
+                                    'lg:text-blueGray-200': transparent,
+                                }"
+                            />
+                            Categories
+                        </Link>
+                    </li>
+                    <li class="flex items-center">
+                        <Link
+                            class="text-blueGray-700 flex items-center px-3 text-xs font-bold uppercase"
+                            :class="{
+                                'lg:hover:text-blueGray-200 py-4 lg:py-2 lg:text-white':
+                                    transparent,
+                                'hover:text-blueGray-500 py-2': !transparent,
+                            }"
                             :href="route('products')"
                         >
                             <i

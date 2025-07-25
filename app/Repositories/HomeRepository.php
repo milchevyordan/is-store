@@ -8,8 +8,25 @@ use App\Models\Product;
 
 class HomeRepository
 {
-    public static function getOfferings()
+    /**
+     * Get the latest 3 products for the homepage.
+     *
+     * @return mixed
+     */
+    public static function getOfferings(): mixed
     {
         return Product::whereNotNull('image')->latest()->take(3)->get();
+    }
+
+    /**
+     * Get products by given category in query.
+     *
+     * @return mixed
+     */
+    public static function getProductsByCategory()
+    {
+        $categoryId = request()->query('category_id');
+
+        return Product::where('category_id', $categoryId)->latest()->get();
     }
 }
