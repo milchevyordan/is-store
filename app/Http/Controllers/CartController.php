@@ -1,22 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CartRequest;
 use App\Http\Requests\StoreOrderRequest;
 use App\Services\CartService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use Inertia\Response;
 use Throwable;
 
 class CartController extends Controller
 {
     /**
-     * Return the cart order page
+     * Return the cart order page.
      *
      * @return Response
      */
@@ -32,9 +34,9 @@ class CartController extends Controller
     }
 
     /**
-     * Add the product to cart
+     * Add the product to cart.
      *
-     * @param CartRequest $request
+     * @param  CartRequest      $request
      * @return RedirectResponse
      */
     public function addProduct(CartRequest $request): RedirectResponse
@@ -45,9 +47,9 @@ class CartController extends Controller
     }
 
     /**
-     * Change the quantity of the product in cart
+     * Change the quantity of the product in cart.
      *
-     * @param Request $request
+     * @param  Request          $request
      * @return RedirectResponse
      */
     public function changeQuantity(Request $request): RedirectResponse
@@ -58,9 +60,9 @@ class CartController extends Controller
     }
 
     /**
-     * Remove the product from cart
+     * Remove the product from cart.
      *
-     * @param CartRequest $request
+     * @param  CartRequest      $request
      * @return RedirectResponse
      */
     public function removeFromCart(CartRequest $request): RedirectResponse
@@ -71,9 +73,9 @@ class CartController extends Controller
     }
 
     /**
-     * Save the order in database
+     * Save the order in database.
      *
-     * @param StoreOrderRequest $request
+     * @param  StoreOrderRequest $request
      * @return RedirectResponse
      */
     public function saveOrder(StoreOrderRequest $request): RedirectResponse

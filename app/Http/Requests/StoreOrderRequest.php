@@ -28,7 +28,7 @@ class StoreOrderRequest extends FormRequest
             'phone'                   => 'required|string|max:255',
             'name'                    => 'required|string|max:255',
             'email'                   => 'nullable|string|email|max:255',
-            'delivery_address' => 'nullable|string|max:255',
+            'delivery_address'        => 'nullable|string|max:255',
             'additional_requirements' => 'nullable|string|max:255',
         ];
     }

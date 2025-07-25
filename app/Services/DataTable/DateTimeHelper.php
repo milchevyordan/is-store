@@ -108,10 +108,10 @@ class DateTimeHelper
     {
         // Define patterns and corresponding PHP date format characters
         $patterns = [
-            '/^\d{2}'.preg_quote($dateDelimiter).'\d{2}'.preg_quote($dateDelimiter).'\d{4}$/' => 'd'.$dateDelimiter.'m'.$dateDelimiter.'Y', // Matches dd{delimiter}mm{delimiter}YYYY format
-            '/^\d{2}'.preg_quote($dateDelimiter).'\d{2}$/'                                    => 'd'.$dateDelimiter.'m', // Matches dd{delimiter}mm format
-            '/^\d{2}'.preg_quote($timeDelimiter).'\d{2}$/'                                    => 'H'.$timeDelimiter.'i', // Matches HH{delimiter}MM format
-            '/^\d{2}'.preg_quote($timeDelimiter).'\d{2}'.preg_quote($timeDelimiter).'\d{2}$/' => 'H'.$timeDelimiter.'i'.$timeDelimiter.'s', // Matches HH{delimiter}MM{delimiter}SS format
+            '/^\d{2}' . preg_quote($dateDelimiter) . '\d{2}' . preg_quote($dateDelimiter) . '\d{4}$/' => 'd' . $dateDelimiter . 'm' . $dateDelimiter . 'Y', // Matches dd{delimiter}mm{delimiter}YYYY format
+            '/^\d{2}' . preg_quote($dateDelimiter) . '\d{2}$/'                                        => 'd' . $dateDelimiter . 'm', // Matches dd{delimiter}mm format
+            '/^\d{2}' . preg_quote($timeDelimiter) . '\d{2}$/'                                        => 'H' . $timeDelimiter . 'i', // Matches HH{delimiter}MM format
+            '/^\d{2}' . preg_quote($timeDelimiter) . '\d{2}' . preg_quote($timeDelimiter) . '\d{2}$/' => 'H' . $timeDelimiter . 'i' . $timeDelimiter . 's', // Matches HH{delimiter}MM{delimiter}SS format
         ];
 
         // Loop through patterns to find a match

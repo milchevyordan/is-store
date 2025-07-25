@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
@@ -15,17 +17,21 @@ class ProfileController extends Controller
 {
     /**
      * Show the user's profile settings page.
+     *
+     * @param Request $request
      */
     public function edit(Request $request): Response
     {
         return Inertia::render('settings/Profile', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => $request->session()->get('status'),
+            'status'          => $request->session()->get('status'),
         ]);
     }
 
     /**
      * Update the user's profile information.
+     *
+     * @param ProfileUpdateRequest $request
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
@@ -42,6 +48,8 @@ class ProfileController extends Controller
 
     /**
      * Delete the user's profile.
+     *
+     * @param Request $request
      */
     public function destroy(Request $request): RedirectResponse
     {

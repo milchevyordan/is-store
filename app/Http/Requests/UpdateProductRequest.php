@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -30,10 +32,10 @@ class UpdateProductRequest extends FormRequest
                 'max:255',
                 Rule::unique('categories', 'title')->ignore($this->product->id),
             ],
-            'image'             => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
-            'category_id'       => 'nullable|exists:categories,id',
-            'description'       => 'nullable|string',
-            'price'             => 'nullable|numeric',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'category_id' => 'nullable|exists:categories,id',
+            'description' => 'nullable|string',
+            'price'       => 'nullable|numeric',
         ];
     }
 }

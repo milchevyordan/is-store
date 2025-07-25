@@ -382,7 +382,7 @@ class DataTable
                 //    Search in the relation tables
                 if ($column->relation) {
                     $query->orWhereHas($column->relation->relationString, function ($q) use ($column, $searchText) {
-                        $q->where($column->relation->relationColumn, 'LIKE', '%'.$searchText.'%');
+                        $q->where($column->relation->relationColumn, 'LIKE', '%' . $searchText . '%');
                     });
                 } else {
                     // Search in the main table

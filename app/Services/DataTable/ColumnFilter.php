@@ -101,8 +101,8 @@ class ColumnFilter
             $builder = $useOrWhere ? $builder->orWhereRelation($column->relation->relationString, $column->relation->relationColumn, $operator, $value)
             : $builder->orWhereRelation($column->relation->relationString, $column['relationColumn'], $operator, $value);
         } else {  // If NOT enum AND DESNT HAVE relation
-            $builder = $useOrWhere ? $builder->orWhere($builder->getModel()->getTable().".{$columnKey}", $operator, $value)
-            : $builder->where($builder->getModel()->getTable().".{$columnKey}", $operator, $value);
+            $builder = $useOrWhere ? $builder->orWhere($builder->getModel()->getTable() . ".{$columnKey}", $operator, $value)
+            : $builder->where($builder->getModel()->getTable() . ".{$columnKey}", $operator, $value);
         }
 
         $this->setBuilder($builder);

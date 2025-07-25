@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Traits\HasChangeLogs;
@@ -38,7 +40,7 @@ class Product extends Model
     ];
 
     /**
-     * Return the category relation to the product
+     * Return the category relation to the product.
      *
      * @return BelongsTo
      */

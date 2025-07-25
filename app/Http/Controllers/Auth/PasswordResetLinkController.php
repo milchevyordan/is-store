@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -13,6 +15,8 @@ class PasswordResetLinkController extends Controller
 {
     /**
      * Show the password reset link request page.
+     *
+     * @param Request $request
      */
     public function create(Request $request): Response
     {
@@ -24,6 +28,7 @@ class PasswordResetLinkController extends Controller
     /**
      * Handle an incoming password reset link request.
      *
+     * @param  Request                                    $request
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse

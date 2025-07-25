@@ -71,7 +71,7 @@ class ProductService
     /**
      * Create the quiz question.
      *
-     * @param StoreProductRequest $request
+     * @param  StoreProductRequest $request
      * @return self
      */
     public function createProduct(StoreProductRequest $request): self
@@ -92,7 +92,7 @@ class ProductService
     /**
      * Update the quiz question.
      *
-     * @param UpdateProductRequest $request
+     * @param  UpdateProductRequest $request
      * @return self
      */
     public function updateProduct(UpdateProductRequest $request): self

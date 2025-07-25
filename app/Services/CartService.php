@@ -7,11 +7,8 @@ namespace App\Services;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
-use App\Models\User;
-use App\Notifications\EmailNotification;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Notification;
 
 class CartService
 {
@@ -50,7 +47,7 @@ class CartService
     }
 
     /**
-     * Get the value of the cart
+     * Get the value of the cart.
      */
     public function getCartItems(): Collection
     {

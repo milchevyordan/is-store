@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -15,17 +17,21 @@ class AuthenticatedSessionController extends Controller
 {
     /**
      * Show the login page.
+     *
+     * @param Request $request
      */
     public function create(Request $request): Response
     {
         return Inertia::render('auth/Login', [
             'canResetPassword' => Route::has('password.request'),
-            'status' => $request->session()->get('status'),
+            'status'           => $request->session()->get('status'),
         ]);
     }
 
     /**
      * Handle an incoming authentication request.
+     *
+     * @param LoginRequest $request
      */
     public function store(LoginRequest $request): RedirectResponse
     {
@@ -38,6 +44,8 @@ class AuthenticatedSessionController extends Controller
 
     /**
      * Destroy an authenticated session.
+     *
+     * @param Request $request
      */
     public function destroy(Request $request): RedirectResponse
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use App\Services\CartService;
@@ -23,6 +25,8 @@ class HandleInertiaRequests extends Middleware
      * Determines the current asset version.
      *
      * @see https://inertiajs.com/asset-versioning
+     *
+     * @param Request $request
      */
     public function version(Request $request): ?string
     {
@@ -34,6 +38,7 @@ class HandleInertiaRequests extends Middleware
      *
      * @see https://inertiajs.com/shared-data
      *
+     * @param  Request              $request
      * @return array<string, mixed>
      */
     public function share(Request $request): array
@@ -42,14 +47,14 @@ class HandleInertiaRequests extends Middleware
 
         return [
             ...parent::share($request),
-            'name' => config('app.name'),
+            'name'  => config('app.name'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
-            'auth' => [
+            'auth'  => [
                 'user' => $request->user(),
             ],
             'cartItemsCount' => (new CartService())->getCartItemsCount(),
-            'ziggy' => [
-                ...(new Ziggy)->toArray(),
+            'ziggy'          => [
+                ...(new Ziggy())->toArray(),
                 'location' => $request->url(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
@@ -31,7 +33,7 @@ class ProductController extends Controller
     public function index(): Response
     {
         return Inertia::render('products/Index', [
-            'dataTable'         => $this->service->getIndexMethodDatatable(),
+            'dataTable' => $this->service->getIndexMethodDatatable(),
         ]);
     }
 
@@ -41,12 +43,14 @@ class ProductController extends Controller
     public function create(): Response
     {
         return Inertia::render('products/Create', [
-            'categories'  => fn () => (new MultiSelectService(Category::query()))->dataForSelect(),
+            'categories' => fn () => (new MultiSelectService(Category::query()))->dataForSelect(),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param StoreProductRequest $request
      */
     public function store(StoreProductRequest $request): RedirectResponse
     {
@@ -69,28 +73,34 @@ class ProductController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @param Product $product
      */
     public function show(Product $product)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param Product $product
      */
     public function edit(Product $product): Response
     {
         $product->load(['changeLogsLimited', 'creator']);
 
         return Inertia::render('products/Edit', [
-            'product'       => $product,
-            'categories'    => fn () => (new MultiSelectService(Category::query()))->dataForSelect(),
-            'changeLogs'    => Inertia::lazy(fn () => ChangeLogService::getChangeLogsDataTable($product)),
+            'product'    => $product,
+            'categories' => fn () => (new MultiSelectService(Category::query()))->dataForSelect(),
+            'changeLogs' => Inertia::lazy(fn () => ChangeLogService::getChangeLogsDataTable($product)),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param UpdateProductRequest $request
+     * @param Product              $product
      */
     public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {
@@ -113,9 +123,10 @@ class ProductController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param Product $product
      */
     public function destroy(Product $product)
     {
-        //
     }
 }

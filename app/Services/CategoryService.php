@@ -70,7 +70,7 @@ class CategoryService
     /**
      * Create the quiz question.
      *
-     * @param StoreCategoryRequest $request
+     * @param  StoreCategoryRequest $request
      * @return self
      */
     public function createCategory(StoreCategoryRequest $request): self
@@ -90,7 +90,7 @@ class CategoryService
     /**
      * Update the quiz question.
      *
-     * @param UpdateCategoryRequest $request
+     * @param  UpdateCategoryRequest $request
      * @return self
      */
     public function updateCategory(UpdateCategoryRequest $request): self

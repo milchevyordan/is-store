@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
@@ -45,6 +47,8 @@ class CategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param StoreCategoryRequest $request
      */
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
@@ -67,26 +71,32 @@ class CategoryController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @param Category $category
      */
     public function show(Category $category)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param Category $category
      */
     public function edit(Category $category): Response
     {
         $category->load(['changeLogsLimited', 'creator']);
 
         return Inertia::render('categories/Edit', [
-            'category'         => $category,
+            'category' => $category,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param UpdateCategoryRequest $request
+     * @param Category              $category
      */
     public function update(UpdateCategoryRequest $request, Category $category): RedirectResponse
     {
@@ -109,9 +119,10 @@ class CategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param Category $category
      */
     public function destroy(Category $category)
     {
-        //
     }
 }

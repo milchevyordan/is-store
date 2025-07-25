@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -12,6 +14,8 @@ class EmailVerificationPromptController extends Controller
 {
     /**
      * Show the email verification prompt page.
+     *
+     * @param Request $request
      */
     public function __invoke(Request $request): RedirectResponse|Response
     {
