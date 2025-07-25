@@ -45,7 +45,7 @@ defineProps<{
                     <img
                         class="b-auto mx-auto h-auto max-w-full object-contain md:absolute md:right-0 md:top-0 md:mt-20 md:w-5/12"
                         src="/images/cover-image.webp"
-                        alt="Potato"
+                        alt="iPhone"
                     />
                 </div>
             </div>
@@ -96,7 +96,7 @@ defineProps<{
                                 >
                                     {{ product.title }}
                                 </h5>
-                                <Link href="/">
+                                <Link :href="route('product', product.slug)">
                                     <div
                                         class="relative mb-6 flex w-full min-w-0 flex-col break-words rounded-lg bg-white shadow-lg transition-all duration-150 ease-linear hover:-mt-4"
                                     >

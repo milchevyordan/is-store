@@ -59,8 +59,10 @@ class ProductService
         return (new DataTable(
             Product::query()
         ))
+            ->setRelation('category', ['id', 'title'])
             ->setColumn('action', 'Action')
             ->setColumn('id', '#', true, true)
+            ->setColumn('category.title', 'Category', true, true)
             ->setColumn('title', 'Title', true, true)
             ->setColumn('price', 'Price', true, true)
             ->setColumn('created_at', 'Created', true, true)
