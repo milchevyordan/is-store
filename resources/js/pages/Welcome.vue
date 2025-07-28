@@ -31,7 +31,7 @@ defineProps<{
                             class="mt-8 flex flex-col justify-center md:flex-row md:justify-start"
                         >
                             <Link
-                                :href="route('home')"
+                                :href="route('products')"
                                 class="get-started mb-3 rounded bg-cyan-500 px-6 py-4 text-center font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none active:bg-emerald-600 md:mb-0 md:mr-3"
                             >
                                 Check the products
@@ -58,7 +58,6 @@ defineProps<{
             >
                 <svg
                     class="absolute bottom-0 overflow-hidden"
-                    xmlns="http://www.w3.org/2000/svg"
                     preserveAspectRatio="none"
                     version="1.1"
                     viewBox="0 0 2560 100"
