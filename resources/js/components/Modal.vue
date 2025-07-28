@@ -95,10 +95,10 @@ const maxWidthClass = computed(() => {
                 <transition name="modal-slide" appear>
                     <div
                         v-show="show"
-                        class="relative mb-6 w-full rounded-lg bg-white shadow-xl dark:bg-gray-800"
+                        class="relative mb-6 w-full mx-auto rounded-lg bg-white shadow-xl dark:bg-gray-800"
                         :class="maxWidthClass"
                     >
-                        <!-- Close Button -->
+                    <!-- Close Button -->
                         <IconXmark
                             class="absolute w-6 h-6 cursor-pointer right-3 top-3 hover:opacity-70 transition-all active:scale-90"
                             @click="close"

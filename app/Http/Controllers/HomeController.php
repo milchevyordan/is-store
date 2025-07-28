@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
-use App\Repositories\HomeRepository;
+use App\Repositories\ProductRepository;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -20,7 +20,7 @@ class HomeController extends Controller
     public function index(): Response
     {
         return Inertia::render('Welcome', [
-            'offerings' => HomeRepository::getOfferings(),
+            'offerings' => ProductRepository::getOfferings(),
         ]);
     }
 
@@ -31,8 +31,12 @@ class HomeController extends Controller
      */
     public function products(): Response
     {
+        $products = ProductRepository::getPaginatedWithCategory();
+
         return Inertia::render('ProductsList', [
-            'products' => Product::with('category:id,title')->latest()->get(),
+            'products' => Inertia::merge(fn () => $products->items()),
+            'current'  => $products->currentPage(),
+            'last'     => $products->lastPage(),
         ]);
     }
 
@@ -51,9 +55,22 @@ class HomeController extends Controller
 
     public function categories(): Response
     {
+        $currentCategory = request()->query('category_id');
+        $previousCategory = session('last_category_id');
+
+        $products = ProductRepository::getPaginatedByCategory();
+
+        session(['last_category_id' => $currentCategory]);
+
+        $useMerge = $previousCategory == $currentCategory;
+
         return Inertia::render('CategoriesList', [
             'categories' => fn () => Category::all(),
-            'products'   => fn () => HomeRepository::getProductsByCategory(),
+            'products'   => $useMerge
+                ? Inertia::merge(fn () => $products->items())
+                : $products->items(),
+            'current' => $products->currentPage(),
+            'last'    => $products->lastPage(),
         ]);
     }
 }

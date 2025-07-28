@@ -97,26 +97,26 @@ const toggleNavbar = () => {
                 </ul>
                 <ul class="flex list-none flex-col lg:ml-auto lg:flex-row">
                     <nav class="flex items-center justify-end gap-4">
-                        <Link
+                        <a
                             v-if="$page.props.auth.user"
                             :href="route('dashboard')"
                             class="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a]"
                         >
                             Dashboard
-                        </Link>
+                        </a>
                         <template v-else>
-                            <Link
+                            <a
                                 :href="route('login')"
                                 class="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035]"
                             >
                                 Log in
-                            </Link>
-                            <Link
+                            </a>
+                            <a
                                 :href="route('register')"
                                 class="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a]"
                             >
                                 Register
-                            </Link>
+                            </a>
                         </template>
                     </nav>
                     <li class="flex items-center">

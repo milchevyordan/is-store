@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import { Product } from '@/types';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, WhenVisible } from '@inertiajs/vue3';
+import LoadingAnimation from '@/components/LoadingAnimation.vue';
 
 defineProps<{
     products: Product[];
+    current: number;
+    last: number;
 }>();
 </script>
 
@@ -62,6 +65,24 @@ defineProps<{
                             </div>
                         </div>
                     </Link>
+
+                    <WhenVisible
+                        always
+                        :params="{
+                         data: {
+                           page: current + 1,
+                         },
+                         only: ['products', 'current'],
+                         preserveUrl: true,
+                        }"
+                    >
+                        <div v-show="current < last">
+                            <LoadingAnimation />
+                        </div>
+                        <template #fallback>
+                            <LoadingAnimation />
+                        </template>
+                    </WhenVisible>
                 </div>
             </div>
         </div>

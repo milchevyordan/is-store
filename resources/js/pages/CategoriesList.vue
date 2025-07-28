@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import { Category, Product } from '@/types';
-import { Head, Link, router } from '@inertiajs/vue3';
+import { Head, Link, router, WhenVisible } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import LoadingAnimation from '@/components/LoadingAnimation.vue';
 
 defineProps<{
     categories: Category[];
     products?: Product[];
+    current: number;
+    last: number;
 }>();
 
 const selectedCategoryId = ref();
@@ -15,14 +18,15 @@ const filterByCategory = async (categoryId: number) => {
     await new Promise((resolve, reject) => {
         router.reload({
             data: {
-                category_id: categoryId
+                category_id: categoryId,
+                page: 1,
             },
-            only: ['products'],
+            only: ['products', 'current', 'last'],
             onSuccess: resolve,
             onError: reject,
         });
     });
-}
+};
 </script>
 
 <template>
@@ -91,6 +95,24 @@ const filterByCategory = async (categoryId: number) => {
                             </div>
                         </div>
                     </Link>
+
+                    <WhenVisible
+                        always
+                        :params="{
+                         data: {
+                           page: current + 1,
+                         },
+                         only: ['products', 'current'],
+                         preserveUrl: true,
+                        }"
+                    >
+                        <div v-show="current < last">
+                            <LoadingAnimation />
+                        </div>
+                        <template #fallback>
+                            <LoadingAnimation />
+                        </template>
+                    </WhenVisible>
                 </div>
             </div>
         </div>

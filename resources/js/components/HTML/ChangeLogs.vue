@@ -157,6 +157,7 @@ const closeChangeLogModal = () => {
 
     <Modal
         :show="showChangeLogModal"
+        max-width="7xl"
         @close="closeChangeLogModal"
     >
         <div class="p-3 px-3.5 text-xl font-medium">Change Logs</div>

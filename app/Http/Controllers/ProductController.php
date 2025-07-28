@@ -52,7 +52,8 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreProductRequest $request
+     * @param  StoreProductRequest $request
+     * @return RedirectResponse
      */
     public function store(StoreProductRequest $request): RedirectResponse
     {
@@ -85,7 +86,8 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Product $product
+     * @param  Product  $product
+     * @return Response
      */
     public function edit(Product $product): Response
     {
