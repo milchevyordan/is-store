@@ -8,7 +8,7 @@ import Table from "@/DataTable/Table.vue";
 import { DataTable } from "@/DataTable/types";
 import IconPencilSquare from "@/icons/PencilSquare.vue";
 import IconTrash from "@/icons/Trash.vue";
-import { type BreadcrumbItem, Category, ChangeLog, DeleteForm, Product } from '@/types';
+import { type BreadcrumbItem, Category, ChangeLog, DeleteForm } from '@/types';
 import {dateTimeToLocaleString} from "@/utils";
 import AppLayout from "@/layouts/AppLayout.vue";
 import ChangeLogs from '@/components/HTML/ChangeLogs.vue';
@@ -28,9 +28,8 @@ const deleteForm = useForm<DeleteForm>({
     created_at: null!,
 });
 
-const openDeleteModal = (item: Product) => {
+const openDeleteModal = (item: Category) => {
     deleteForm.id = item.id;
-    deleteForm.created_at = item.created_at as Date;
 
     showDeleteModal.value = true;
 };
@@ -72,7 +71,6 @@ const breadcrumbs: BreadcrumbItem[] = [
                             :data-table="dataTable"
                             :per-page-options="[5, 10, 15, 20, 50]"
                             :global-search="true"
-                            :advanced-filters="false"
                         >
                             <template #additionalContent>
                                 <div class="w-full flex gap-2">
@@ -104,7 +102,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                                     <button
                                         :title="'Delete'"
                                         class="border border-gray-300 dark:border-gray-700 rounded-md p-1 active:scale-90 transition"
-                                        @click="openDeleteModal(item.id)"
+                                        @click="openDeleteModal(item)"
                                     >
                                         <IconTrash classes="w-4 h-4 " />
                                     </button>

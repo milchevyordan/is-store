@@ -80,7 +80,6 @@ const breadcrumbs: BreadcrumbItem[] = [
                             :global-search="true"
                             :type-search="true"
                             :show-trashed="true"
-                            :advanced-filters="false"
                             :selected-row-indexes="notDeliveredYet"
                             :selected-row-column="'id'"
                         >
@@ -156,8 +155,7 @@ const breadcrumbs: BreadcrumbItem[] = [
         <div
             class="border-b border-gray-100 p-3 px-3.5 text-xl font-medium dark:border-gray-700"
         >
-            Delete order {{ deleteForm?.id ?? '' }} added on
-            {{ dateTimeToLocaleString(deleteForm?.created_at) }} ?
+            Delete order {{ deleteForm?.id ?? '' }} added on {{ dateTimeToLocaleString(deleteForm?.created_at) }} ?
         </div>
 
         <form

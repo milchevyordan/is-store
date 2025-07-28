@@ -97,9 +97,19 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Order $order
+     * @param  Order            $order
+     * @return RedirectResponse
      */
-    public function destroy(Order $order)
+    public function destroy(Order $order): RedirectResponse
     {
+        try {
+            $order->delete();
+
+            return redirect()->back()->with('success', 'The record has been successfully deleted.');
+        } catch (Throwable $th) {
+            Log::error($th->getMessage(), ['exception' => $th]);
+
+            return redirect()->back()->withErrors(['Error deleting record.']);
+        }
     }
 }

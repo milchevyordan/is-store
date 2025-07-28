@@ -8,6 +8,7 @@ use App\Traits\HasChangeLogs;
 use App\Traits\HasCreator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -16,6 +17,7 @@ class Product extends Model
     use HasCreator;
     use HasChangeLogs;
     use HasSlug;
+    use SoftDeletes;
 
     /**
      * Get the options for generating the slug.

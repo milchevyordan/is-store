@@ -72,7 +72,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                             :data-table="dataTable"
                             :per-page-options="[5, 10, 15, 20, 50]"
                             :global-search="true"
-                            :advanced-filters="false"
+                            :show-trashed="true"
                         >
                             <template #additionalContent>
                                 <div class="w-full flex gap-2">
@@ -104,7 +104,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                                     <button
                                         :title="'Delete'"
                                         class="border border-gray-300 dark:border-gray-700 rounded-md p-1 active:scale-90 transition"
-                                        @click="openDeleteModal(item.id)"
+                                        @click="openDeleteModal(item)"
                                     >
                                         <IconTrash classes="w-4 h-4 " />
                                     </button>

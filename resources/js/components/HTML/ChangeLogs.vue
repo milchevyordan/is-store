@@ -166,7 +166,6 @@ const closeChangeLogModal = () => {
                 :data-table="changeLogs"
                 :per-page-options="[5, 10, 15, 20, 50]"
                 :global-search="true"
-                :advanced-filters="false"
                 prop-name="changeLogs"
             >
                 <template #cell(change)="{ value, item }">
