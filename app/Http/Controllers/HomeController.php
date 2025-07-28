@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
+use App\Services\ProductFrontService;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -55,22 +56,9 @@ class HomeController extends Controller
 
     public function categories(): Response
     {
-        $currentCategory = request()->query('category_id');
-        $previousCategory = session('last_category_id');
-
-        $products = ProductRepository::getPaginatedByCategory();
-
-        session(['last_category_id' => $currentCategory]);
-
-        $useMerge = $previousCategory == $currentCategory;
-
         return Inertia::render('CategoriesList', [
             'categories' => fn () => Category::all(),
-            'products'   => $useMerge
-                ? Inertia::merge(fn () => $products->items())
-                : $products->items(),
-            'current' => $products->currentPage(),
-            'last'    => $products->lastPage(),
+            ...ProductFrontService::getPaginatedByCategory(),
         ]);
     }
 }

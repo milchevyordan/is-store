@@ -88,6 +88,8 @@ class ProductService
 
         $this->setProduct($product);
 
+        (new CacheService())->clearProductCache();
+
         return $this;
     }
 
@@ -109,6 +111,8 @@ class ProductService
 
         $changeLoggerService->logChanges($product);
         $this->setProduct($product);
+
+        (new CacheService())->clearProductCache();
 
         return $this;
     }

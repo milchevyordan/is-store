@@ -84,6 +84,8 @@ class CategoryService
 
         $this->setCategory($category);
 
+        (new CacheService())->clearProductCache();
+
         return $this;
     }
 
@@ -104,6 +106,8 @@ class CategoryService
 
         $changeLoggerService->logChanges($category);
         $this->setCategory($category);
+
+        (new CacheService())->clearProductCache();
 
         return $this;
     }

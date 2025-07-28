@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Models\Product;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Support\Facades\Cache;
 
 class ProductRepository
 {
@@ -16,7 +17,9 @@ class ProductRepository
      */
     public static function getOfferings(): mixed
     {
-        return Product::whereNotNull('image')->latest()->take(3)->get();
+        return Cache::remember('products.offerings', now()->addMinutes(60), function () {
+            return Product::whereNotNull('image')->latest()->take(3)->get();
+        });
     }
 
     /**
@@ -27,9 +30,13 @@ class ProductRepository
      */
     public static function getPaginatedWithCategory(int $perPage = 6): Paginator
     {
-        return Product::with('category:id,title')
-            ->latest()
-            ->paginate($perPage);
+        $page = request()->query('page', 1);
+
+        $cacheKey = "products.paginated.page_{$page}_perPage_{$perPage}";
+
+        return Cache::remember($cacheKey, now()->addMinutes(10), function () use ($perPage) {
+            return Product::with('category:id,title')->latest()->paginate($perPage);
+        });
     }
 
     /**
@@ -40,7 +47,14 @@ class ProductRepository
     public static function getPaginatedByCategory(int $perPage = 6): Paginator
     {
         $categoryId = request()->query('category_id');
+        $page = request()->query('page', 1);
 
-        return Product::where('category_id', $categoryId)->latest()->paginate($perPage);
+        $cacheKey = "products.by_category.category_{$categoryId}_page_{$page}_perPage_{$perPage}";
+
+        return Cache::remember($cacheKey, now()->addMinutes(10), function () use ($categoryId, $perPage) {
+            return Product::where('category_id', $categoryId)
+                ->latest()
+                ->paginate($perPage);
+        });
     }
 }
